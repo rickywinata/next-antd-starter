@@ -1,0 +1,14 @@
+substitutions:
+  _SERVICE_NAME: ""
+  _ENVIRONMENT: ""
+
+steps:
+  - name: "gcr.io/cloud-builders/docker"
+    args:
+      - build
+      - "--tag=gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"
+      - "--file=./docker/${_ENVIRONMENT}/Dockerfile"
+      - "."
+
+images:
+  - "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}"

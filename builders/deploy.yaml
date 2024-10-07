@@ -1,0 +1,22 @@
+substitutions:
+  _REGION: "asia-southeast1"
+  _SERVICE_NAME: ""
+  _TAG: "latest"
+  _REVISION_SUFFIX:
+
+steps:
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    args:
+      - "bash"
+      - "-eEuo"
+      - "pipefail"
+      - "-c"
+      - |-
+        gcloud run deploy "${_SERVICE_NAME}" \
+          --project "${PROJECT_ID}" \
+          --platform "managed" \
+          --allow-unauthenticated \
+          --region "${_REGION}" \
+          --revision-suffix "${_REVISION_SUFFIX}" \
+          --port 3000 \
+          --image "gcr.io/${PROJECT_ID}/${_SERVICE_NAME}:${_TAG}"
